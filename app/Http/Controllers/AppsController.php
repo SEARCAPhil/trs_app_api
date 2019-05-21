@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class AppsController
 {
   public function auth (Request $request) {
-    if(is_null($request->app_key) || empty($request->app_key)) return;
+    if(is_null($request->app_key) || empty($request->app_key)) return; 
     return self::view($request->app_key);
   }
 
@@ -19,12 +19,13 @@ class AppsController
     $validity = SessionController::setValidity ();
     $app_token = null;
     $session_id = null;
+
     // Generate session and app_token
     if(isset($app_cred[0]->client_secret)) {
       $app_token = hash('sha256', $app_cred[0]->client_secret);
       $uuid = SessionController::setUUID ();
       // ::create($account_id, $uuid, $agent, $app_token, $validity)
-      $session_id = SessionController::create(null, $uuid, $_SERVER['HTTP_USER_AGENT']??null, $app_token, $validity);
+      $session_id = SessionController::create(null, $uuid, $_SERVER['HTTP_USER_AGENT']??null, $app_token, $app_cred[0]->id, $validity);
 
       return json_encode(array([
         'app_token' => $app_token,

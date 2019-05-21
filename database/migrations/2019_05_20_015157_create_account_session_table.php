@@ -18,8 +18,10 @@ class CreateAccountSessionTable extends Migration
             $table->integer('account_id')->nullable();
             $table->string('uuid')->nullable()->comment('For mobile identity');
             $table->string('user_agent');
-            $table->string('app_token');
-            $table->timestamp('validity');
+            $table->string('app_token', 255);
+            $table->text('access_token')->nullable();
+            $table->integer('app_id');
+            $table->timestamp('validity')->nullable();
             $table->timestamp('date_created')->useCurrent();
             $table->timestamps();
             $table->softDeletes();

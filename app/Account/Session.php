@@ -21,6 +21,7 @@ class Session extends Model
       'uuid',
       'user_agent',
       'app_token',
+      'app_id',
       'validity'
     ];
 
