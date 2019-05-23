@@ -15,7 +15,7 @@ class CreateUsersTable extends Migration
     {
         Schema::create('account', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('uid');
+            $table->string('uid', 255)->nullable()->comment('for 3rd party');
             $table->string('username', 255);
             $table->string('password', 255);
             $table->integer('status'); // for deletion

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAccountRoleGroupPrivilegeTable extends Migration
+class CreateTimeRecordHistoryTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,12 @@ class CreateAccountRoleGroupPrivilegeTable extends Migration
      */
     public function up()
     {
-        Schema::create('account_role_group_privilege', function (Blueprint $table) {
+        Schema::create('time_record_history', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('account_role_group_id');
-            $table->text('manifest');
+            $table->integer('account_profile_id');
+            $table->integer('time_record_id');
+            $table->string('action', 100);
+            $table->text('log');
             $table->softDeletes();
             $table->timestamps();
         });
@@ -29,6 +31,6 @@ class CreateAccountRoleGroupPrivilegeTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('account_role_group_privilege');
+        Schema::dropIfExists('time_record_history');
     }
 }

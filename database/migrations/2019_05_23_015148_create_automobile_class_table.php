@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAccountRoleGroupTable extends Migration
+class CreateAutomobileClassTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,9 @@ class CreateAccountRoleGroupTable extends Migration
      */
     public function up()
     {
-        Schema::create('account_role_group', function (Blueprint $table) {
+        Schema::create('automobile_class', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('role', 200);
-            $table->text('description');
-            $table->text('manifest');
-            $table->softDeletes();
+            $table->string('class');
             $table->timestamps();
         });
     }
@@ -30,6 +27,6 @@ class CreateAccountRoleGroupTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('account_role_group');
+        Schema::dropIfExists('automobile_class');
     }
 }

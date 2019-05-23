@@ -16,7 +16,7 @@ class CorporateController
 {
 
   private function login ($username, $password) {
-    return Account::where('username', '=', $username)->where('password', '=', $password)->first();
+    return Account::with(['manifest'])->where('username', '=', $username)->where('password', '=', $password)->first();
   } 
 
   private function createMessage ($message) {
@@ -48,7 +48,8 @@ class CorporateController
     return json_encode([
       'access_token' => $access_token,
       'token_type' => 'bearer',
-      'payload' => $profile
+      'payload' => $profile,
+      'manifest' => $login_data->manifest
     ]);
   }
 }

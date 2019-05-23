@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\Exception\UnsatisfiedDependencyException;
 
-class ProfileController
+class DriverController
 {
   const DRIVER = 'driver';
   /**
@@ -17,5 +17,9 @@ class ProfileController
    */
   public static function view ($id) {
     return Profile::where('uid', '=', $id)->first();
+  }
+
+  public function lists () {
+    return Profile::where('position', '=', 'driver')->paginate();
   }
 }
