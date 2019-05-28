@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Account;
 
 use App\Account\Profile;
+use App\Account\Driver;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Ramsey\Uuid\Uuid;
-use Ramsey\Uuid\Exception\UnsatisfiedDependencyException;
+
 
 class DriverController
 {
@@ -20,6 +20,7 @@ class DriverController
   }
 
   public function lists () {
-    return Profile::where('position', '=', 'driver')->paginate();
+    //var_dump(Driver::select(['*'])->toSQL());
+    return Driver::select(['*'])->paginate();
   }
 }

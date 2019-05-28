@@ -14,7 +14,7 @@ class CreateAutomobileTable extends Migration
     public function up()
     {
         Schema::create('automobile', function (Blueprint $table) {
-            $table->increments('id');
+            $table->increments('automobile_id');
             $table->string('plate_no', 50);
             $table->string('manufacturer', 150);
             $table->string('model')->nullable();

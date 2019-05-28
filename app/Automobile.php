@@ -10,6 +10,7 @@ class Automobile extends Model
 {
     use SoftDeletes;
     protected $table = 'automobile';
+    protected $primaryKey = 'automobile_id';
     /**
      * The attributes that are mass assignable.
      *

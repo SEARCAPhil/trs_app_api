@@ -27,7 +27,7 @@ Route::post('/auth/corporate', 'Auth\CorporateController@auth');
 /**
  * Drivers
  */
-Route::get('/account/drivers', 'Account\DriverController@lists');
+Route::get('/account/driver', 'Account\DriverController@lists');
 
 
 /**

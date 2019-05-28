@@ -9,19 +9,19 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class AutomobileController
 {
   public function lists () {
-    return Automobile::paginate();
+    return Automobile::select(['*', 'automobile_id as id'])->paginate();
   }
 
   public function view(Request $request) {
-    return Automobile::where('id', '=', $request->id)->get();
+    return Automobile::select(['automobile.*', 'automobile_id as id'])->where('automobile_id', '=', $request->id)->first();
   }
 
   public function delete(Request $request) {
-    return Automobile::where('id', '=', $request->id)->delete();
+    return Automobile::where('automobile_id', '=', $request->id)->delete();
   }
 
   public function search (Request $request) {
-    return Automobile::where('id', 'like', '%'.$request->param.'%')
+    return Automobile::select(['automobile.*', 'automobile_id as id'])->where('automobile_id', 'like', '%'.$request->param.'%')
     ->orWhere('plate_no', 'like', '%'.$request->param.'%')
     ->orWhere('manufacturer', 'like', '%'.$request->param.'%')
     ->orWhere('model', 'like', '%'.$request->param.'%')
@@ -50,7 +50,7 @@ class AutomobileController
   }
 
   private function update ($id, $plate_no, $manufacturer, $model, $year, $color, $conduction_no, $transmission_type, $date_acquired, $date_registered, $notes) {
-    return Automobile::where('id', '=', $id)->update([
+    return Automobile::where('automobile_id', '=', $id)->update([
       'plate_no' => $plate_no, 
       'manufacturer' => $manufacturer, 
       'model' => $model, 
