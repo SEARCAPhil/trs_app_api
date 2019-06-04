@@ -28,6 +28,9 @@ Route::post('/auth/corporate', 'Auth\CorporateController@auth');
  * Drivers
  */
 Route::get('/account/driver', 'Account\DriverController@lists');
+Route::get('/account/driver/{id}/profile', 'Account\DriverController@view');
+Route::get('/account/driver/search/{param}', 'Account\DriverController@search');
+
 
 
 /**
@@ -50,3 +53,5 @@ Route::get('/automobile/records/time/{id}', 'Automobile\TimeRecordController@vie
 Route::put('/automobile/records/time/{id}', 'Automobile\TimeRecordController@updateService');
 Route::delete('/automobile/records/time/{id}', 'Automobile\TimeRecordController@delete');
 Route::get('/automobile/records/time/search/{param}/{date}', 'Automobile\TimeRecordController@search');
+
+Route::get('/automobile/{id}/records/time/{date}', 'Automobile\TimeRecordController@viewPerVehicleAndDate');

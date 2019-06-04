@@ -11,4 +11,5 @@ class Profile extends Model
 
     protected $table = "account_profile";
     protected $dates = ['deleted_at'];
+
 }

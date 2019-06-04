@@ -20,7 +20,18 @@ class DriverController
   }
 
   public function lists () {
-    //var_dump(Driver::select(['*'])->toSQL());
-    return Driver::select(['*'])->paginate();
+    
+   return Driver::with('profile')->paginate();
+  
   }
+
+  public function search (Request $request) {
+    $searchString = $request->param;
+    return Driver::whereHas('profile', function($query) use ($searchString){
+      $query->where('profile_name', 'like', '%'.$searchString.'%');
+    })->with(['profile' => function($query) use ($searchString){
+      $query->where('profile_name', 'like', '%'.$searchString.'%');
+    }])->paginate(50);
+  }  
+
 }

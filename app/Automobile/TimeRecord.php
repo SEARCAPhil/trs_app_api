@@ -37,6 +37,14 @@ class TimeRecord extends Model
     }
 
     public function vehicleDetails () {
-      return $this->hasOne(\App\Automobile::class, 'id')->select(['id', 'plate_no', 'manufacturer', 'model']);
+      return $this->hasOne(\App\Automobile::class, 'automobile_id')->select(['automobile_id', 'plate_no', 'manufacturer', 'model']);
+    }
+
+    public function driverDetailsInView () {
+      return $this->hasOne(\App\Account\Profile::class, 'uid', 'driver_id')->select(['uid', 'id', 'profile_name', 'profile_image', 'last_name', 'first_name'])->orderBy('id', 'desc');
+    }
+
+    public function vehicleDetailsInView () {
+      return $this->hasOne(\App\Automobile::class, 'automobile_id', 'vehicle_id')->select(['automobile_id', 'plate_no', 'manufacturer', 'model']);
     }
 }

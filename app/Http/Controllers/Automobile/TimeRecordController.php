@@ -17,7 +17,13 @@ class TimeRecordController
   }
 
   public function view(Request $request) {
-    return TimeRecord::where('id', '=', $request->id)->get();
+    return TimeRecord::where('id', '=', $request->id)->with(['driverDetailsInView', 'vehicleDetailsInView'])->first();
+  }
+
+  public function viewPerVehicleAndDAte(Request $request) {
+    $date = (new \DateTime($request->date))->format('Y-m-d');
+    $dateNoDay = (new \DateTime($request->date))->format('Y-m-');
+    return TimeRecord::where('vehicle_id', '=', $request->id)->where('date', '>=', $date)->where('date', '<=', $dateNoDay.'31')->with(['driverDetailsInView', 'vehicleDetailsInView'])->paginate(5000);
   }
 
   public function delete(Request $request) {
@@ -47,11 +53,11 @@ class TimeRecordController
       'created_by' => $created_by]);
       $automobile->save();
     # return last_id
-    return $automobile->id;
+    return json_encode(array('id' => $automobile->id));
   }
 
   private function update ($id, $date, $time, $mode, $mileage, $tt_number, $driver_id, $guard_id, $drivers_name, $vehicle_id, $plate_no, $remarks, $created_by) {
-    return TimeRecord::where('id', '=', $id)->update([
+    $is_updated = TimeRecord::where('id', '=', $id)->update([
       'date' => $date, 
       'time' => $time, 
       'mode' => $mode, 
@@ -64,6 +70,8 @@ class TimeRecordController
       'plate_no' => $plate_no,
       'remarks' => $remarks
     ]);
+  
+    return json_encode(array('status' => $is_updated));
   }
 
   public function createService (Request $request) {

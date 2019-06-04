@@ -16,9 +16,8 @@ class Driver extends Model
     
     protected $table = "designation";
     protected $dates = ['deleted_at'];
-    public $primaryKey = 'id';
 
     public function profile () {
-      return $this->hasOne(\App\Account\Profile::class, 'uid')->first();
+      return $this->hasOne(\App\Account\Profile::class, 'uid', 'uid');
     }
 }

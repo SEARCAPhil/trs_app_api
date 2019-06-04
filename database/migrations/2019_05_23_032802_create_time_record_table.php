@@ -26,7 +26,7 @@ class CreateTimeRecordTable extends Migration
             $table->integer('vehicle_id')->nullable();
             $table->integer('created_by');
             $table->string('plate_no', 50)->nullable()->comment('for non-orgs vehicle only');
-            $table->text('remarks');
+            $table->text('remarks')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
